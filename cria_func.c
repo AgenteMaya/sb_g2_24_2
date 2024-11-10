@@ -12,6 +12,20 @@ unsigned colocaByte(unsigned char codigo[], unsigned char outroCodigo[], unsigne
     return posInicio;
 }
 
+int busca_leave(char codigo[])/*busca a posição o comando leave c9*/
+{
+    int i = 0;
+    
+    while (codigo[i])
+    {
+        if(codigo[i] == 'c9')
+            return i;
+        i++;
+    }
+
+    return -1;
+} 
+
 void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
 {
     unsigned char posicao = 0;
