@@ -1,0 +1,18 @@
+teste.o: formato do arquivo elf64-x86-64
+
+
+Desmontagem da seção .text:
+
+0000000000000000 <teste>:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   48 c7 c0 00 00 00 00    mov    $0x0,%rax
+   b:   ff d0                   call   *%rax
+   d:   bf 00 00 00 00          mov    $0x0,%edi
+  12:   be 00 00 00 00          mov    $0x0,%esi
+  17:   ba 00 00 00 00          mov    $0x0,%edx
+  1c:   48 c7 c7 00 00 00 00    mov    $0x0,%rdi
+  23:   48 c7 c6 00 00 00 00    mov    $0x0,%rsi
+  2a:   48 c7 c2 00 00 00 00    mov    $0x0,%rdx
+  31:   c9                      leave  
+  32:   c3                      ret    
