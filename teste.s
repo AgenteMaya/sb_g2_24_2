@@ -8,9 +8,9 @@ teste:
     movl    $0, %edi 
     movl    $0, %esi 
     movl    $0, %edx
-    movq    $0, %rdi 
-    movq    $0, %rsi 
-    movq    $0, %rdx
+    movq    $7071817044022531464, %rdi 
+    movq    $7071817044022531464, %rsi 
+    movq    $7071817044022531464, %rdx
     leave
     ret
 

@@ -1,0 +1,8 @@
+COLOCAR VALORES NOS VETORES
+
+valor = 10
+ind = 1
+for (int i = 0; i < 4; i++)
+{
+    movl[ind++] = (valor >> i * 8) & 0xff
+}
