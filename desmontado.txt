@@ -16,3 +16,52 @@ Desmontagem da seção .text:
   2a:   48 c7 c2 00 00 00 00    mov    $0x0,%rdx
   31:   c9                      leave  
   32:   c3                      ret    
+
+
+
+teste.o: formato do arquivo elf64-x86-64
+
+
+Desmontagem da seção .text:
+
+0000000000000000 <teste>:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   48 c7 c0 00 00 00 00    mov    $0x0,%rax
+   b:   ff d0                   call   *%rax
+   d:   bf 00 00 00 00          mov    $0x0,%edi
+  12:   be 00 00 00 00          mov    $0x0,%esi
+  17:   ba 00 00 00 00          mov    $0x0,%edx
+  1c:   48 bf 88 15 84 29 22    movabs $0x6224242229841588,%rdi
+  23:   24 24 62 
+  26:   48 be 88 15 84 29 22    movabs $0x6224242229841588,%rsi
+  2d:   24 24 62 
+  30:   48 ba 88 15 84 29 22    movabs $0x6224242229841588,%rdx
+  37:   24 24 62 
+  3a:   c9                      leave  
+  3b:   c3                      ret  
+
+
+
+teste.o: formato do arquivo elf64-x86-64
+
+
+Desmontagem da seção .text:
+
+0000000000000000 <teste>:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   48 b8 88 15 84 29 22    movabs $0x6224242229841588,%rax
+   b:   24 24 62 
+   e:   ff d0                   call   *%rax
+  10:   bf 00 00 00 00          mov    $0x0,%edi
+  15:   be 00 00 00 00          mov    $0x0,%esi
+  1a:   ba 00 00 00 00          mov    $0x0,%edx
+  1f:   48 bf 88 15 84 29 22    movabs $0x6224242229841588,%rdi
+  26:   24 24 62 
+  29:   48 be 88 15 84 29 22    movabs $0x6224242229841588,%rsi
+  30:   24 24 62 
+  33:   48 ba 88 15 84 29 22    movabs $0x6224242229841588,%rdx
+  3a:   24 24 62 
+  3d:   c9                      leave  
+  3e:   c3                      ret    
