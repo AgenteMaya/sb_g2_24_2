@@ -18,9 +18,60 @@ unsigned contaParam(DescParam params[], int n)
     return qtd_params;    
 }
 
-unsigned organizaByte(unsigned char movl, params[i].valor)
+/* unsigned char* organizaByte(unsigned char mov[], DescParam* params)
 {
+    unsigned size = sizeof(mov);
+    unsigned ind = 0;
+    if (size == 5)
+    {
+        ind = 1;
+    }
+        
+    else
+    {
+        ind = 2;
+        void* p1 = params->valor;
+    }
+        
 
+    
+    for (unsigned i = 0; i < size; i++)
+    {
+        mov[ind++] = ((vPonteiro) >>  i * 8) & 0xff;
+    }
+} */
+
+void organizaByteL(unsigned char movl[], int* valor)
+{
+    unsigned ind = 1;
+    for (int i = 0; i < 4; i++)
+    {
+        movl[ind++] = (*valor >> i * 8) & 0xff;
+    }
+}
+
+void organizaByteQ(unsigned char movq[], void** valor)
+{
+    unsigned long p1 = *valor;
+
+    unsigned ind = 2;
+    for (int i = 0; i < 4; i++)
+    {
+        movq[ind++] = (p1 >> i * 8) & 0xff;
+    }
+}
+
+void decideOrganizaByte (unsigned mov[], void** valor, unsigned tipo)
+{
+    if (!tipo) // INTEIRO
+    {
+        int* pointer = *valor;
+        organizaByteL(mov, *pointer);
+    }
+    else{
+        void* pointer = *valor;
+        organizaByteQ(mov, pointer);
+    }
 }
 
 unsigned colocaByte(unsigned char codigo[], unsigned char outroCodigo[], unsigned posInicio, unsigned qtdElementos)
@@ -58,25 +109,32 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
     posicao = colocaByte(params, inicio, posicao, sizeof(inicio));
     unsigned qtd_params = contaParam(params, n);
 
-    for (unsigned i = 0; i < n; i++)
+    
+
+    for (unsigned i = qtd_params; i < n; i++)
     {
         unsigned origem = params[i].orig_val;
         switch(origem)
         {
             case 0: //PARAM
-               break;
+                continue;
             case 1: //FIX
-                 if (!params[i].tipo_val) // INTEIRO
+                if (!params[i].tipo_val) // INTEIRO
                 {
-                    organizaByte(movl[i], params[i].valor);
+                    organizaByteL(movl[i], &params[i].valor);
                 }
                 else{
-                    organizaByte(movq[i], params[i].valor);
-
+                    organizaByteQ(movq[i], &params[i].valor);
                 }
-                
+                break;
             case 2: //IND
-
+                if (!params[i].tipo_val) // INTEIRO
+                {
+                    decideOrganizaByte(movl[i], &params[i].valor, params[i].tipo_val);
+                }
+                else{
+                    decideOrganizaByte(movq[i], &params[i].valor, params[i].tipo_val);
+                }
         }
     }
     posicao = colocaByte(params, final, posicao, sizeof(inicio));
