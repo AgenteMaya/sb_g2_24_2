@@ -3,6 +3,21 @@
 
 #include "cria_func.h"
 
+
+unsigned contaParam(DescParam params[], int n)
+{
+    unsigned qtd_params = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (params[i].orig_val == PARAM)
+        {
+            qtd_params++;
+        }
+          
+    }
+    return qtd_params;    
+}
+
 unsigned organizaByte(unsigned char movl, params[i].valor)
 {
 
@@ -41,7 +56,8 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
 
     
     posicao = colocaByte(params, inicio, posicao, sizeof(inicio));
-    
+    unsigned qtd_params = contaParam(params, n);
+
     for (unsigned i = 0; i < n; i++)
     {
         unsigned origem = params[i].orig_val;
