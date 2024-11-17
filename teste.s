@@ -3,14 +3,14 @@
 teste:
     pushq       %rbp
     movq    %rsp, %rbp
-    movq    $7071817044022531464, %rax
+    movq    $0x4444229128A24490, %rax
     call    *%rax
     movl    $0, %edi 
     movl    $0, %esi 
     movl    $0, %edx
-    movq    $7071817044022531464, %rdi 
-    movq    $7071817044022531464, %rsi 
-    movq    $7071817044022531464, %rdx
+    movq    $0x4444229128A24490, %rdi 
+    movq    $0x4444229128A24490, %rsi 
+    movq    $0x4444229128A24490, %rdx
     leave
     ret
 

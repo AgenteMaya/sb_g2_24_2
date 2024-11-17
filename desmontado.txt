@@ -65,3 +65,28 @@ Desmontagem da seção .text:
   3a:   24 24 62 
   3d:   c9                      leave  
   3e:   c3                      ret    
+
+
+
+  teste.o: formato do arquivo elf64-x86-64
+
+
+Desmontagem da seção .text:
+
+0000000000000000 <teste>:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   48 b8 90 44 a2 28 91    movabs $0x4444229128a24490,%rax
+   b:   22 44 44 
+   e:   ff d0                   call   *%rax
+  10:   bf 00 00 00 00          mov    $0x0,%edi
+  15:   be 00 00 00 00          mov    $0x0,%esi
+  1a:   ba 00 00 00 00          mov    $0x0,%edx
+  1f:   48 bf 90 44 a2 28 91    movabs $0x4444229128a24490,%rdi
+  26:   22 44 44 
+  29:   48 be 90 44 a2 28 91    movabs $0x4444229128a24490,%rsi
+  30:   22 44 44 
+  33:   48 ba 90 44 a2 28 91    movabs $0x4444229128a24490,%rdx
+  3a:   22 44 44 
+  3d:   c9                      leave  
+  3e:   c3                      ret    
