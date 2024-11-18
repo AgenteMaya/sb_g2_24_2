@@ -6,7 +6,6 @@
 #include "cria_func.h"
 #define DEBUG
 
-
 unsigned contaParam(DescParam params[], int n)
 {
     unsigned qtd_params = 0;
@@ -52,6 +51,9 @@ void organizaByteL(unsigned char movl[], int* valor)
         fprintf(stderr, "\n[DEBUG - %d] valor: %d\n", __LINE__,*valor);
     #endif
     unsigned ind = 1;
+    #ifdef DEBUG
+        fprintf(stderr, "\n[DEBUG - %d] movl[%d] - %hhx \n", __LINE__, 0, movl[0]);
+    #endif
     for (int i = 0; i < 4; i++)
     {
         #ifdef DEBUG
@@ -77,7 +79,10 @@ void organizaByteQ(unsigned char movq[], void** valor)
     #endif
 
     unsigned ind = 2;
-   
+     #ifdef DEBUG
+            fprintf(stderr, "\n[DEBUG - %d] movl[%d] - %hhx \n", __LINE__, ind, movq[0]);
+            fprintf(stderr, "\n[DEBUG - %d] movl[%d] - %hhx \n", __LINE__, ind, movq[1]);
+    #endif
     for (int i = 0; i < 8; i++)
     {
         #ifdef DEBUG
@@ -104,14 +109,17 @@ void decideOrganizaByte (unsigned char mov[], void** valor, unsigned tipo)
 
 unsigned colocaByte(unsigned char codigo[], unsigned char outroCodigo[], unsigned posInicio, unsigned qtdElementos)
 {
+    #ifdef DEBUG
+        fprintf(stderr, "\nENTREI NA colocaByte\n", __LINE__);
+    #endif
     for ( unsigned i = 0; i < qtdElementos; i++)
     {
         #ifdef DEBUG
-        fprintf(stderr, "\n[DEBUG - %d] codigo[%d] - %hhx --- coutrocodigo[%d] - %hhx\n", __LINE__, posInicio, codigo[posInicio], i, outroCodigo[i]);
+            fprintf(stderr, "\n[DEBUG - %d] codigo[%d] - %hhx --- coutrocodigo[%d] - %hhx\n", __LINE__, posInicio, codigo[posInicio], i, outroCodigo[i]);
         #endif
         codigo[posInicio++] = outroCodigo[i];
         #ifdef DEBUG
-                fprintf(stderr, "\n[DEBUG - %d] codigo[%d] - %hhx --- coutrocodigo[%d] - %hhx\n", __LINE__, posInicio -1, codigo[posInicio -1 ], i, outroCodigo[i]);
+                    fprintf(stderr, "\n[DEBUG - %d] codigo[%d] - %hhx --- coutrocodigo[%d] - %hhx\n", __LINE__, posInicio -1, codigo[posInicio -1 ], i, outroCodigo[i]);
 
         #endif
     }
@@ -201,27 +209,33 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                 }
                 break;
         }
-        
+        #ifdef DEBUG
+                fprintf(stderr, "\n[DEBUG - %d] SAI DO SWITCH\n", __LINE__);
+        #endif
         if (!params[i].tipo_val) // INTEIRO
         {
             #ifdef DEBUG
-                fprintf(stderr, "\n[DEBUG - %d] Vou entra no coloca byte final - INTEIRO\n", __LINE__);
+                fprintf(stderr, "\n[DEBUG - %d] Vou entra no coloca byte- INTEIRO\n", __LINE__);
             #endif
-            posicao = colocaByte(codigo, movl[i], posicao, sizeof(movl[i]));
+            posicao = colocaByte(codigo, movl[qtdParams], posicao, sizeof(movl[i]));
         }
         else
         {
             #ifdef DEBUG
-                fprintf(stderr, "\n[DEBUG - %d] Vou entra no coloca byte final - PARAM\n", __LINE__);
+                fprintf(stderr, "\n[DEBUG - %d] Vou entra no coloca byte - PARAM\n", __LINE__);
             #endif
-            posicao = colocaByte(codigo, movq[i], posicao, sizeof(movq[i]));
+            posicao = colocaByte(codigo, movq[qtdParams], posicao, sizeof(movq[i]));
         }
+        qtdParams++;
     }
     #ifdef DEBUG
         fprintf(stderr, "\n[DEBUG - %d] PONTEIRO DA FUNCAO: %p\n", __LINE__, f);
     #endif
     organizaByteQ(final, &f);
-    posicao = colocaByte(codigo, final, posicao, sizeof(inicio));
+    #ifdef DEBUG
+        fprintf(stderr, "\n[DEBUG - %d] Vou entra no ultima colocaByte\n", __LINE__);
+    #endif
+    posicao = colocaByte(codigo, final, posicao, sizeof(final));
     #ifdef DEBUG
         for (unsigned j = 0; j < 30; j++)
         {
