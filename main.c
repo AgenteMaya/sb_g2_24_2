@@ -1,9 +1,20 @@
 #include <stdio.h>
 #include "cria_func.h"
 
+#define DEBUG
+
 typedef int (*func_ptr) ();
 
+void oi(void)
+{
+
+}
+
 int mult(int x, int y) {
+  #ifdef DEBUG
+    fprintf(stderr, "\n[DEBUG - %d] x - %x\n", __LINE__, x);
+    fprintf(stderr, "\n[DEBUG - %d] y - %x\n", __LINE__, y);
+  #endif
   return x * y;
 }
 
@@ -28,7 +39,9 @@ int main(void)
     f_mult = (func_ptr) codigo;   
 
     for (i = 1; i <=10; i++) {
-        printf("%d\n", f_mult(i)); /* a nova função só recebe um argumento */
+      fprintf(stderr, "\n[DEBUG - %d] endereço de i : %p\n", __LINE__, &i);      
+      int resultado = f_mult(i);
+      printf("%d\n", resultado); /* a nova função só recebe um argumento */
     }
 
     return 0;

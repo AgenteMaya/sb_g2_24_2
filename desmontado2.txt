@@ -1,0 +1,66 @@
+teste2.o: formato do arquivo elf64-x86-64
+
+
+Desmontagem da seção .text:
+
+0000000000000000 <teste2>:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   48 83 ec 20             sub    $0x20,%rsp
+   8:   48 89 7d f8             mov    %rdi,-0x8(%rbp)
+   c:   48 89 75 f0             mov    %rsi,-0x10(%rbp)
+  10:   48 89 55 e8             mov    %rdx,-0x18(%rbp)
+  14:   48 8b 7d f8             mov    -0x8(%rbp),%rdi
+  18:   48 8b 75 f8             mov    -0x8(%rbp),%rsi
+  1c:   48 8b 55 f8             mov    -0x8(%rbp),%rdx
+  20:   48 8b 7d f0             mov    -0x10(%rbp),%rdi
+  24:   48 8b 75 f0             mov    -0x10(%rbp),%rsi
+  28:   48 8b 55 f0             mov    -0x10(%rbp),%rdx
+  2c:   48 8b 7d e8             mov    -0x18(%rbp),%rdi
+  30:   48 8b 75 e8             mov    -0x18(%rbp),%rsi
+  34:   48 8b 55 e8             mov    -0x18(%rbp),%rdx
+  38:   8b 7d fc                mov    -0x4(%rbp),%edi
+  3b:   8b 75 fc                mov    -0x4(%rbp),%esi
+  3e:   8b 55 fc                mov    -0x4(%rbp),%edx
+  41:   8b 7d f4                mov    -0xc(%rbp),%edi
+  44:   8b 75 f4                mov    -0xc(%rbp),%esi
+  47:   8b 55 f4                mov    -0xc(%rbp),%edx
+  4a:   8b 7d ec                mov    -0x14(%rbp),%edi
+  4d:   8b 75 ec                mov    -0x14(%rbp),%esi
+  50:   8b 55 ec                mov    -0x14(%rbp),%edx
+  53:   c9                      leave  
+  54:   c3                      ret 
+
+
+  teste2.o: formato do arquivo elf64-x86-64
+
+
+Desmontagem da seção .text:
+
+0000000000000000 <teste2>:
+   0:   55                      push   %rbp
+   1:   48 89 e5                mov    %rsp,%rbp
+   4:   48 83 ec 20             sub    $0x20,%rsp
+   8:   48 89 7d f8             mov    %rdi,-0x8(%rbp)
+   c:   48 89 75 f0             mov    %rsi,-0x10(%rbp)
+  10:   48 89 55 e8             mov    %rdx,-0x18(%rbp)
+  14:   48 8b 7d f8             mov    -0x8(%rbp),%rdi
+  18:   48 8b 75 f8             mov    -0x8(%rbp),%rsi
+  1c:   48 8b 55 f8             mov    -0x8(%rbp),%rdx
+  20:   48 8b 7d f0             mov    -0x10(%rbp),%rdi
+  24:   48 8b 75 f0             mov    -0x10(%rbp),%rsi
+  28:   48 8b 55 f0             mov    -0x10(%rbp),%rdx
+  2c:   48 8b 7d e8             mov    -0x18(%rbp),%rdi
+  30:   48 8b 75 e8             mov    -0x18(%rbp),%rsi
+  34:   48 8b 55 e8             mov    -0x18(%rbp),%rdx
+  38:   8b 7d fc                mov    -0x4(%rbp),%edi
+  3b:   8b 75 fc                mov    -0x4(%rbp),%esi
+  3e:   8b 55 fc                mov    -0x4(%rbp),%edx
+  41:   8b 7d f4                mov    -0xc(%rbp),%edi
+  44:   8b 75 f4                mov    -0xc(%rbp),%esi
+  47:   8b 55 f4                mov    -0xc(%rbp),%edx
+  4a:   8b 7d ec                mov    -0x14(%rbp),%edi
+  4d:   8b 75 ec                mov    -0x14(%rbp),%esi
+  50:   8b 55 ec                mov    -0x14(%rbp),%edx
+  53:   c9                      leave  
+  54:   c3                      ret    
