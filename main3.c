@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include "cria_func.h"
-#include <stddef.h>
+//#include <stddef.h>
+#include <string.h>
 typedef int (*func_ptr) (void* candidata, size_t n);
 
 char fixa[] = "quero saber se a outra string é um prefixo dessa";
 
 #define DEBUG
 
-int memcmp(const char *str1, const char *str2, size_t num) {
+/* int memcmp(const char *str1, const char *str2, size_t num) {
     #ifdef DEBUG
         fprintf(stderr, "\n[DEBUG - %d] STR1: %s\n", __LINE__, str1);
         fprintf(stderr, "\n[DEBUG - %d] num: %u\n", __LINE__, num);
@@ -24,7 +25,7 @@ int memcmp(const char *str1, const char *str2, size_t num) {
         }
     }
     return 0;
-}
+} */
 
 int main (void) {
   DescParam params[3];
