@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "cria_func.h"
 
-#define DEBUG
+//#define DEBUG
 
 typedef int (*func_ptr) ();
 
@@ -39,7 +39,9 @@ int main(void)
     f_mult = (func_ptr) codigo;   
 
     for (i = 1; i <=10; i++) {
-      fprintf(stderr, "\n[DEBUG - %d] endereço de i : %p\n", __LINE__, &i);      
+      #ifdef DEBUG
+      fprintf(stderr, "\n[DEBUG - %d] endereço de i : %p\n", __LINE__, &i);  
+      #endif    
       int resultado = f_mult(i);
       printf("%d\n", resultado); /* a nova função só recebe um argumento */
     }
