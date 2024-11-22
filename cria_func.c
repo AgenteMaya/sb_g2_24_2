@@ -65,7 +65,7 @@ unsigned colocaByte(unsigned char codigo[], unsigned char outroCodigo[], unsigne
  * @param f É o endereço da função original
  * @param params É o vetor de estrutura do tipo Param em que cada Param tem as características de um parâmetro
  * @param n É a quantidade de elementos que há no vetor Param
- * @param codigo É o vetor de bytes em que devem ser os colocados os bytes de linguagem de máquina em que 
+ * @param codigo É o vetor de bytes em que devem ser colocados os bytes de linguagem de máquina que fazem parrte da nova função intermediária
  */
 void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
 {
