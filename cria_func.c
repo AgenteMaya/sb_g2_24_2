@@ -43,8 +43,7 @@ void organizaByteQ(unsigned char movq[], void** valor)
 }
 
 /**
- * Essa função copia um byte de um vetor para outro vetor
- * 
+ * Essa função copia um byte de um vetor para outro vetor 
  * @param codigo Vetor que recebe os bytes copiados
  * @param outroCodigo Vetor que tem os bytes que serão copiados
  * @param posInicio É a posição, índice em que começa a colocar os bytes no vetor codigo
@@ -70,6 +69,8 @@ unsigned colocaByte(unsigned char codigo[], unsigned char outroCodigo[], unsigne
 void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
 {
     unsigned char posicao = 0; //Contador que guarda a proxima posicao a ser colocar no vetor codigo
+
+    /**Vetor que contem os bytes iniciais que são comuns para todas as funções que serão criadas */
     unsigned char inicio[] = {
                                 0x55,                       //pushq %rbp
                                 0x48, 0x89, 0xe5,           //movq  %rsp, %rbp
@@ -78,33 +79,43 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                                 0x48, 0x89, 0x75, 0xf0,     //movq  %rsi, -16(%rbp)
                                 0x48, 0x89, 0x55, 0xe8      //movq  %rdi, -24(%rbp)
                              };
+
+    /**Vetor que contem os bytes finais que são comuns para todas as funções que serão criadas */
     unsigned char final[] = {
                                 0x48, 0xb8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     //movq  f, %r10
                                 0xff, 0xd0,     //call *%rax   
                                 0xc9,           //leave
                                 0xc3            //ret
                             };
+
+    /**Vetor de vetores que contem as opções de movl para registradores usados no modo FIX*/                        
     unsigned char movl[][5] = {
                                 {0xbf, 0x00, 0x00, 0x00, 0x00},     //movl  $  , %edi
                                 {0xbe, 0x00, 0x00, 0x00, 0x00},     //movl  $  , %esi
                                 {0xba, 0x00, 0x00, 0x00, 0x00}      //movl  $  , %edx
                               };
+
+    /**Vetor de vetores que contem as opções de movQ para registradores usados no modo FIX para parametros*/                        
     unsigned char movq[][10] = {
                                 {0x48, 0xbf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},     //movq  $  , %rdi
                                 {0x48, 0xbe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},     //movq  $  , %rsi
                                 {0x48, 0xba, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}      //movq  $  , %rdx
                                };
+
     unsigned char vInd[] = {0x49, 0xba, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};     //movq  $  , %r10
+
     unsigned char movsIndsL [][3] = {
                                         {0x41, 0x8b, 0x3a},     //movl  (%r10),%edi
                                         {0x41, 0x8b, 0x32},     //movl  (%r10),%esi
                                         {0x41, 0x8b, 0x12}      //movl  (%r10),%edx
                                     };
+
     unsigned char movsIndsQ [][3] = {
-                                        {0x49, 0x8b, 0x3a},     //movq  (%r10),%rdi
-                                        {0x49, 0x8b, 0x32},     //movq  (%r10),%rsi
-                                        {0x49, 0x8b, 0x12}      //movq  (%r10),%rdx
+                                        {0x4c, 0x89, 0xd7},     //movq  %r10,%rdi
+                                        {0x4c, 0x89, 0xd6},     //movq  %r10,%rsi
+                                        {0x4c, 0x89, 0xd2}      //movq  %r10,%rdx
                                     };
+
     unsigned char paramsL[][3][3] = {
                                         {
                                             {0x8b, 0x7d, 0xf8},     //movl  -8(%rbp),%edi
@@ -122,6 +133,7 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                                             {0x8b, 0x55, 0xe8}      //movl  -24(%rbp),%edx
                                         }
                                     };
+
     unsigned char paramsQ [][3][4]= {
                                         {
                                             {0x48, 0x8b, 0x7d, 0xf8},     //movq  -8(%rbp),%rdi

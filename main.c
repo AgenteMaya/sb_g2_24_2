@@ -3,7 +3,7 @@
 
 //#define DEBUG
 
-typedef int (*func_ptr) ();
+typedef int (*func_ptr) (int x);
 
 void oi(void)
 {

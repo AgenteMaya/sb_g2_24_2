@@ -8,25 +8,6 @@ char fixa[] = "quero saber se a outra string é um prefixo dessa";
 
 #define DEBUG
 
-/* int memcmp(const char *str1, const char *str2, size_t num) {
-    #ifdef DEBUG
-        fprintf(stderr, "\n[DEBUG - %d] STR1: %s\n", __LINE__, str1);
-        fprintf(stderr, "\n[DEBUG - %d] num: %u\n", __LINE__, num);
-        fprintf(stderr, "\n[DEBUG - %d] STR2: %s\n", __LINE__, str2);
-
-    #endif
-    for (size_t i = 0; i < num; i++) {
-        if (str1[i] != str2[i]) {
-            return (unsigned char)str1[i] - (unsigned char)str2[i];
-        }
-        // Para strings, se atingir o fim de qualquer uma, interrompa
-        if (str1[i] == '\0' || str2[i] == '\0') {
-            break;
-        }
-    }
-    return 0;
-} */
-
 int main (void) {
   DescParam params[3];
   func_ptr mesmo_prefixo;
