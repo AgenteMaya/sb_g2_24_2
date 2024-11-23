@@ -6,7 +6,7 @@
  * @author Maria Eduarda da Fonseca Gonçalves Santos 2212985 3WA
  * @author Mayara Ramos Damazio 2210833 3WC
  * @version 1.0
- * @date 22/11/2024
+ * @date 23/11/2024
  */
 
 #include <stdio.h>
@@ -88,34 +88,36 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                                 0xc3            //ret
                             };
 
-    /**Vetor de vetores que contem as opções de movl para registradores usados no modo FIX*/                        
+    /**Vetor de vetores que contem as opções de movl para registradores usados no modo FIX para inteiros*/                        
     unsigned char movl[][5] = {
                                 {0xbf, 0x00, 0x00, 0x00, 0x00},     //movl  $  , %edi
                                 {0xbe, 0x00, 0x00, 0x00, 0x00},     //movl  $  , %esi
                                 {0xba, 0x00, 0x00, 0x00, 0x00}      //movl  $  , %edx
                               };
 
-    /**Vetor de vetores que contem as opções de movQ para registradores usados no modo FIX para parametros*/                        
+    /**Vetor de vetores que contem as opções de movQ para registradores usados no modo FIX para ponteiros*/                        
     unsigned char movq[][10] = {
                                 {0x48, 0xbf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},     //movq  $  , %rdi
                                 {0x48, 0xbe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},     //movq  $  , %rsi
                                 {0x48, 0xba, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}      //movq  $  , %rdx
                                };
 
+    /**Vetor que contem os bytes de um ponteiro para o registrador r10 */
     unsigned char vInd[] = {0x49, 0xba, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};     //movq  $  , %r10
 
+    /**Vetor de vetores que contem as opções de mover o conteúdo que r10 aponta para registradores. É usado no modo IND para inteiros*/
     unsigned char movsIndsL [][3] = {
                                         {0x41, 0x8b, 0x3a},     //movl  (%r10),%edi
                                         {0x41, 0x8b, 0x32},     //movl  (%r10),%esi
                                         {0x41, 0x8b, 0x12}      //movl  (%r10),%edx
                                     };
-
+    /**Vetor de vetores que contem as opções de mover o conteúdo de r10 para registradores. É usado no modo IND para ponteiros*/
     unsigned char movsIndsQ [][3] = {
                                         {0x4c, 0x89, 0xd7},     //movq  %r10,%rdi
                                         {0x4c, 0x89, 0xd6},     //movq  %r10,%rsi
                                         {0x4c, 0x89, 0xd2}      //movq  %r10,%rdx
                                     };
-
+    /**Vetor tridimensional que contem movls de posições do rbp para os registradores de parâmetros. É usado no modo PARAM para inteiro */
     unsigned char paramsL[][3][3] = {
                                         {
                                             {0x8b, 0x7d, 0xf8},     //movl  -8(%rbp),%edi
@@ -133,7 +135,7 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                                             {0x8b, 0x55, 0xe8}      //movl  -24(%rbp),%edx
                                         }
                                     };
-
+    /**Vetor tridimensional que contem movqs de posições do rbp para os registradores de parâmetros. É usado no modo PARAM para ponteiros*/
     unsigned char paramsQ [][3][4]= {
                                         {
                                             {0x48, 0x8b, 0x7d, 0xf8},     //movq  -8(%rbp),%rdi
@@ -159,7 +161,7 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
    
     for (unsigned i = 0; i < n; i++)
     {
-        unsigned origem = params[i].orig_val;
+        unsigned origem = params[i].orig_val; 
 
         switch(origem)
         {
