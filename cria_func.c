@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "cria_func.h"
+//#define DEBUG
 
 /**
  * Essa função recebe o endereço de um inteiro e coloca em um vetor de bytes os bytes que compõem esse inteiro
@@ -161,11 +162,20 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
    
     for (unsigned i = 0; i < n; i++)
     {
+
+        #ifdef DEBUG
+            fprintf(stderr, "\n[DEBUG - %d] i : %u --- n : %d\n", __LINE__, i, n);
+        #endif
+
         unsigned origem = params[i].orig_val; 
 
         switch(origem)
         {
             case 0: //PARAM
+
+                #ifdef DEBUG
+                    fprintf(stderr, "\n[DEBUG - %d] Entrei no caso param param\n", __LINE__);
+                #endif
                 if (!params[i].tipo_val) // INTEIRO
                 {
                     posicao = colocaByte(codigo, paramsL[qtdParam][i], posicao, sizeof(paramsL[qtdParam][i]));
@@ -177,6 +187,9 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                 qtdParam++;
                 break;
             case 1: //FIX
+                #ifdef DEBUG
+                    fprintf(stderr, "\n[DEBUG - %d] Entrei no caso param fix\n", __LINE__);
+                #endif
                 if (!params[i].tipo_val) // INTEIRO
                 {
                     organizaByteL(movl[i], (int* ) &params[i].valor);
@@ -189,6 +202,9 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                 }
                 break;
             case 2: //IND
+                #ifdef DEBUG
+                    fprintf(stderr, "\n[DEBUG - %d] Entrei no caso param ind\n", __LINE__);
+                #endif
                 organizaByteQ(vInd, (void**) &params[i].valor);
                 posicao = colocaByte(codigo, vInd, posicao, sizeof(vInd));
                 if (!params[i].tipo_val) // INTEIRO
@@ -204,4 +220,12 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
     organizaByteQ(final, &f);
 
     posicao = colocaByte(codigo, final, posicao, sizeof(final));   
+
+    #ifdef DEBUG
+        fprintf(stderr, "\n\n[DEBUG - %d] PRINT DO CODIGO FINAL:\n\n", __LINE__);
+        for (unsigned j = 0; j < 60; j++)
+        {
+            fprintf(stderr, "\n[DEBUG - %d] codigo[%u]: %hhx\n", __LINE__, j, codigo[j]);
+        }
+    #endif
 }

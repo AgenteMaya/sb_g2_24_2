@@ -29,8 +29,9 @@ int main(void)
     unsigned char codigo[500];
 
     params[1].tipo_val = INT_PAR; /* o primeiro parãmetro de mult é int */
-    params[1].orig_val = PARAM;   /* a nova função repassa seu parämetro */
-
+    params[1].orig_val = FIX;   /* a nova função repassa seu parämetro */
+    params[0].valor.v_int = 10;
+    
     params[0].tipo_val = INT_PAR; /* o segundo parâmetro de mult é int */
     params[0].orig_val = FIX;     /* a nova função passa para mult a constante 10 */
     params[0].valor.v_int = 10;
