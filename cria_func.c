@@ -34,10 +34,6 @@ void organizaByteL(unsigned char movl[], int* valor)
  */
 void organizaByteQ(unsigned char movq[], void** valor)
 {
-    #ifdef DEBUG
-        fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, valor);
-        fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, *valor);
-    #endif
     unsigned long pointerAsLong = (unsigned long) *valor;
     unsigned ind = 2; //indice da posição índice da posição inicial que se coloca no vetor. A posição 0 e um byte específico inicial que se coloca no vetor. A posição 0 e 1 são bytes específicos que não devem ser mudados 
 
@@ -220,9 +216,6 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
             case 2: //IND
                 #ifdef DEBUG
                     fprintf(stderr, "\n[DEBUG - %d] Entrei no caso param ind\n", __LINE__);
-                    fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, &params[i].valor);
-                    fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, params[i].valor);
-                    fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, params[i].valor.v_ptr);
                 #endif
                 organizaByteQ(vInd, (void**) &params[i].valor);
                 posicao = colocaByte(codigo, vInd, posicao, sizeof(vInd));
@@ -236,7 +229,6 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                 else{
                     #ifdef DEBUG
                         fprintf(stderr, "\n[DEBUG - %d] Entrei no caso ponteiro\n", __LINE__);
-                        fprintf(stderr, "\n[DEBUG - %d] Entrei no caso ponteiro\n", __LINE__);
                     #endif
                     posicao = colocaByte(codigo, movsIndsQ[i], posicao, sizeof(movsIndsQ[i]));    
                 } 
@@ -247,7 +239,7 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
 
     posicao = colocaByte(codigo, final, posicao, sizeof(final));   
 
-    #ifdef DEBUG_GERAL
+    #ifdef DEBUG
         fprintf(stderr, "\n\n[DEBUG - %d] PRINT DO CODIGO FINAL:\n\n", __LINE__);
         for (unsigned j = 0; j < 60; j++)
         {
