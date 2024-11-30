@@ -16,6 +16,7 @@ teste:
     movq    -8(%rbp), %rdi
     movq    -8(%rbp), %rsi
     movq    -8(%rbp), %rdi
+    movq    (%r10), %rdi
     movq    (%r10), %rsi
     movq    (%r10), %rdx
     movl    (%r10), %r10d
