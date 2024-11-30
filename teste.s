@@ -30,6 +30,13 @@ teste:
     movq    $0x4444229128A24490, %rdi 
     movq    $0x4444229128A24490, %rsi 
     movq    $0x4444229128A24490, %rdx
+
+    movq    $0x4444229128A24490, %r8
+    movq    (%r8), %rdi
+    movq    (%r8), %rsi
+    movq    (%r8), %rdx
+
+
     leave
     ret
 

@@ -6,12 +6,12 @@
  * @author Maria Eduarda da Fonseca Gonçalves Santos 2212985 3WA
  * @author Mayara Ramos Damazio 2210833 3WC
  * @version 1.0
- * @date 23/11/2024
+ * @date 30/11/2024
  */
 
 #include <stdio.h>
 #include "cria_func.h"
-#define DEBUG
+//#define DEBUG
 
 /**
  * Essa função recebe o endereço de um inteiro e coloca em um vetor de bytes os bytes que compõem esse inteiro
@@ -35,16 +35,34 @@ void organizaByteL(unsigned char movl[], int* valor)
 void organizaByteQ(unsigned char movq[], void** valor)
 {
     #ifdef DEBUG
-        fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, valor);
-        fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, *valor);
+        fprintf(stderr, "\n[DEBUG - %d] VALOR DE PTR: %p\n", __LINE__, valor);
+        fprintf(stderr, "\n[DEBUG - %d] VALOR DE PTR[O]: %p\n", __LINE__, *valor);
     #endif
-    unsigned long pointerAsLong = (unsigned long) *valor;
+    unsigned long pointerAsLong = (unsigned long) valor;
     unsigned ind = 2; //indice da posição índice da posição inicial que se coloca no vetor. A posição 0 e um byte específico inicial que se coloca no vetor. A posição 0 e 1 são bytes específicos que não devem ser mudados 
 
     for (int i = 0; i < 8; i++)
     {
         movq[ind++] = (pointerAsLong >> i * 8) & 0xff;
     }
+
+    #ifdef DEBUG_ANTIGO
+        fprintf(stderr, "\n\n[DEBUG - %d] PRINT DO CODIGO INDL:\n\n", __LINE__);
+        for (unsigned j = 0; j < 10; j++)
+        {
+            fprintf(stderr, "\n[DEBUG - %d] codigo[%u]: %hhx\n", __LINE__, j, movq[j]);
+        }
+    #endif
+}
+
+void organizaByteQI(unsigned char movq[], void** valor)
+{
+    #ifdef DEBUG
+        fprintf(stderr, "\n[DEBUG - %d] VALOR DE PTR2: %p\n", __LINE__, valor);
+        fprintf(stderr, "\n[DEBUG - %d] VALOR DE PTR: %p\n", __LINE__, *valor);
+    #endif
+    void* pointerAsLong = *valor;
+    organizaByteQ(movq, *valor);
 }
 
 /**
@@ -59,7 +77,9 @@ unsigned colocaByte(unsigned char codigo[], unsigned char outroCodigo[], unsigne
 {
     for ( unsigned i = 0; i < qtdElementos; i++)
     {
+        //fprintf(stderr, "\n[DEBUG - %d] codigo[%u] :%hhx --- outrocodigo[%u] :%hhx\n", __LINE__, posInicio, codigo[posInicio], i, outroCodigo[i]);
         codigo[posInicio++] = outroCodigo[i];
+        //fprintf(stderr, "\n[DEBUG - %d] codigo[%u] :%hhx --- outrocodigo[%u] :%hhx\n", __LINE__, posInicio -1, codigo[posInicio -1], i, outroCodigo[i]);
     }
     return posInicio;
 }
@@ -118,9 +138,9 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
                                     };
     /**Vetor de vetores que contem as opções de mover o conteúdo de r10 para registradores. É usado no modo IND para ponteiros*/
     unsigned char movsIndsQ [][3] = {
-                                        {0x4c, 0x89, 0xd7},     //movq  %r10,%rdi
-                                        {0x4c, 0x89, 0xd6},     //movq  %r10,%rsi
-                                        {0x4c, 0x89, 0xd2}      //movq  %r10,%rdx
+                                        {0x49, 0x8b, 0x3a},     //movq  (%r10),%rdi
+                                        {0x49, 0x8b, 0x32},     //movq  (%r10),%rsi
+                                        {0x49, 0x8b, 0x12}      //movq  (%r10),%rdx
                                     };
     /**Vetor tridimensional que contem movls de posições do rbp para os registradores de parâmetros. É usado no modo PARAM para inteiro */
     unsigned char paramsL[][3][3] = {
@@ -220,30 +240,35 @@ void cria_func (void* f, DescParam params[], int n, unsigned char codigo[])
             case 2: //IND
                 #ifdef DEBUG
                     fprintf(stderr, "\n[DEBUG - %d] Entrei no caso param ind\n", __LINE__);
-                    fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, &params[i].valor);
+                    /* fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, &params[i].valor);
                     fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, params[i].valor);
-                    fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, params[i].valor.v_ptr);
+                    fprintf(stderr, "\n[DEBUG - %d] %p\n", __LINE__, params[i].valor.v_ptr); */
+                    fprintf(stderr, "\n[DEBUG - %d] ENDEREÇO PTR2: %p\n", __LINE__, params[i].valor.v_ptr);
                 #endif
-                organizaByteQ(vInd, (void**) &params[i].valor);
-                posicao = colocaByte(codigo, vInd, posicao, sizeof(vInd));
+                
                 if (!params[i].tipo_val) // INTEIRO
                 {
                     #ifdef DEBUG
                         fprintf(stderr, "\n[DEBUG - %d] Entrei no caso inteiro\n", __LINE__);
                     #endif
+                    organizaByteQ(vInd, params[i].valor.v_ptr);
+                    posicao = colocaByte(codigo, vInd, posicao, sizeof(vInd));
                     posicao = colocaByte(codigo, movsIndsL[i], posicao, sizeof(movsIndsL[i]));    
                 }
                 else{
                     #ifdef DEBUG
                         fprintf(stderr, "\n[DEBUG - %d] Entrei no caso ponteiro\n", __LINE__);
-                        fprintf(stderr, "\n[DEBUG - %d] Entrei no caso ponteiro\n", __LINE__);
+
                     #endif
+                    organizaByteQ(vInd, params[i].valor.v_ptr);
+                    posicao = colocaByte(codigo, vInd, posicao, sizeof(vInd));
                     posicao = colocaByte(codigo, movsIndsQ[i], posicao, sizeof(movsIndsQ[i]));    
                 } 
                 break;
         }
     }
-    organizaByteQ(final, &f);
+    fprintf(stderr, "\n[DEBUG - %d] ENDEREÇO DA FUNCAO: %p\n", __LINE__, f);
+    organizaByteQ(final, f);
 
     posicao = colocaByte(codigo, final, posicao, sizeof(final));   
 
