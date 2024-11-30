@@ -22,7 +22,7 @@ int main(void)
     
     //FIX - FIX - FIX
 
-    DescParam params_F_F_F[3];
+   /*  DescParam params_F_F_F[3];
     unsigned char codigo[500];
     func_ptr_0_P teste_F_F_F;
 
@@ -51,20 +51,20 @@ int main(void)
     else{
     printf("NÃO PASSOU NO TESTE\n");
 
-    }
+    } */
 
     //FIX - FIX - IND
     DescParam params_F_F_I[3];
     unsigned char codigo_F_F_I[500];
-    func_ptr_0_P teste_F_I;
+    func_ptr_0_P teste_F_F_I;
 
     params_F_F_I[0].tipo_val = INT_PAR;
     params_F_F_I[0].orig_val = FIX;
     params_F_F_I[0].valor.v_int = 15;
 
-    params_F_F_I[0].tipo_val = INT_PAR;
-    params_F_F_I[0].orig_val = FIX;
-    params_F_F_I[0].valor.v_int = 3;
+    params_F_F_I[1].tipo_val = INT_PAR;
+    params_F_F_I[1].orig_val = FIX;
+    params_F_F_I[1].valor.v_int = 3;
 
     int valor = 2;
     params_F_F_I[2].tipo_val = INT_PAR; 
@@ -72,11 +72,12 @@ int main(void)
     params_F_F_I[2].valor.v_ptr = &valor;
 
 
-    cria_func(teste2I, params_F_I, 2, codigo_F_I);
-    teste_F_I = (func_ptr_0_P) codigo_F_I;
-    int resultado_F_I = teste_F_I();
-    printf("\nFIX - IND : ");
-    if( resultado_F_I == 45)
+    cria_func(testa_3I, params_F_F_I, 3, codigo_F_F_I);
+    teste_F_F_I = (func_ptr_0_P) codigo_F_F_I;
+    int resultado_F_F_I = teste_F_F_I();
+    printf("\nFIX - FIX - IND : ");
+    
+    if( resultado_F_F_I == 90)
     {
         printf("PASSOU NO TESTE\n");
     }
