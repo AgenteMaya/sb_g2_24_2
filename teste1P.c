@@ -38,7 +38,7 @@ int main(void)
     printf("%d", tamanho);
     if ( 13 == tamanho)
     {
-        printf("PASSOU NO TESTE\n");
+        printf("tipo_val = PTR_PAR e orig_val = PARAM PASSOU NO TESTE\n");
     }
     else{
         printf(" NÃO PASSOU NO TESTE\n");
@@ -61,7 +61,7 @@ int main(void)
     printf("%d", tamanho);
     if ( 13 == tamanho)
     {
-        printf("PASSOU NO TESTE\n");
+        printf("tipo_val = PTR_PAR e orig_val = FIX PASSOU NO TESTE\n");
     }
     else{
         printf(" NÃO PASSOU NO TESTE\n");
@@ -90,7 +90,7 @@ int main(void)
 
     if ( 13 == mesmo_prefixo2())
     {
-        printf("PASSOU NO TESTE\n");
+        printf("tipo_val = PTR_PAR e orig_val = IND PASSOU NO TESTE\n");
     }
     else{
         printf(" NÃO PASSOU NO TESTE\n");

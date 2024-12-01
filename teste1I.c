@@ -42,7 +42,7 @@ int main(void)
 
     if ( 2 == mesmo_prefixo(-2))
     {
-        printf("PASSOU NO TESTE\n");
+        printf("tipo_val = INT_PAR e orig_val = PARAM PASSOU NO TESTE\n");
     }
     else{
         printf(" NÃO PASSOU NO TESTE\n");
@@ -64,7 +64,7 @@ int main(void)
 
     if ( 2 == mesmo_prefixo2())
     {
-        printf("PASSOU NO TESTE\n");
+        printf("tipo_val = INT_PAR e orig_val = FIX PASSOU NO TESTE\n");
     }
     else{
         printf(" NÃO PASSOU NO TESTE\n");
@@ -85,7 +85,7 @@ int main(void)
 
     if ( 2 == mesmo_prefixo2())
     {
-        printf("PASSOU NO TESTE\n");
+        printf("tipo_val = INT_PAR e orig_val = IND PASSOU NO TESTE\n");
     }
     else{
         printf(" NÃO PASSOU NO TESTE\n");

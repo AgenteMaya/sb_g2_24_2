@@ -63,6 +63,10 @@ int main(void)
         //INT - INT
         //fprintf(stderr, "\n INT - INT : ");
 
+    //FIX - FIX
+    DescParam params_F_F[2];
+    unsigned char codigo[500];
+    func_ptr_0_P teste_F_F;
         //FIX - FIX
         DescParam params_F_F[2];
         unsigned char codigo[500];
@@ -83,6 +87,12 @@ int main(void)
         int resultado_F_F = teste_F_F();
         fprintf(stderr, "\nFIX - FIX : ");
 
+    if( resultado == 45)
+    {
+        printf("tipo_val = INT_PAR e orig_val = FIX | tipo_val = INT_PAR e orig_val = FIX, PASSOU NO TESTE\n");
+    }
+    else{
+        printf("NÃO PASSOU NO TESTE\n");
         if( resultado_F_F == 45)
         {
             fprintf(stderr, "PASSOU NO TESTE\n");
@@ -108,6 +118,16 @@ int main(void)
         params_F_I[1].valor.v_ptr = &valor;
 
 
+    cria_func(teste2I, params_F_I, 2, codigo_F_I);
+    teste_F_I = (func_ptr_0_P) codigo_F_I;
+    int resultado_F_I = teste_F_I();
+    printf("\nFIX - IND : ");
+    if( resultado_F_I == 45)
+    {
+        printf("tipo_val = INT_PAR e orig_val = FIX | tipo_val = INT_PAR e orig_val = IND, PASSOU NO TESTE\n\n");
+    }
+    else{
+        printf("NÃO PASSOU NO TESTE\n");
         cria_func(teste2I, params_F_I, 2, codigo_F_I);
         teste_F_I = (func_ptr_0_P) codigo_F_I;
         int resultado_F_I = teste_F_I();
@@ -135,6 +155,16 @@ int main(void)
         params_F_P[1].orig_val = PARAM;
 
 
+    cria_func(teste2I, params_F_P, 2, codigo_F_P);
+    teste_F_P = (func_ptr_0_P) codigo_F_P;
+    int resultado_F_P = teste_F_P(3);
+    printf("\nFIX - PARAM : ");
+    if( resultado_F_P == 45)
+    {
+        printf("tipo_val = INT_PAR e orig_val = FIX | tipo_val = INT_PAR e orig_val = PARAM, PASSOU NO TESTE\n\n");
+    }
+    else{
+        printf("NÃO PASSOU NO TESTE -- %d\n", resultado_F_P);
         cria_func(teste2I, params_F_P, 2, codigo_F_P);
         teste_F_P = (func_ptr_1_P_I) codigo_F_P;
         int resultado_F_P = teste_F_P(3);
@@ -146,6 +176,12 @@ int main(void)
         else{
             fprintf(stderr, "NÃO PASSOU NO TESTE -- %d\n", resultado_F_P);
 
+    }
+    
+    //IND - FIX
+    DescParam params_I_F[2];
+    unsigned char codigo_I_F[500];
+    func_ptr_0_P teste_I_F;
         }
        
         
@@ -224,6 +260,16 @@ int main(void)
         params_I_P[1].orig_val = PARAM;
 
 
+    cria_func(teste2I, params_I_P, 2, codigo_I_P);
+    teste_I_P = (func_ptr_0_P) codigo_I_P;
+    int resultado_I_P = teste_I_P(3);
+    printf("\nIND - PARAM : ");
+    if( resultado_I_P == 45)
+    {
+        printf("tipo_val = INT_PAR e orig_val = IND | tipo_val = INT_PAR e orig_val = PARAM, PASSOU NO TESTE\n");
+    }
+    else{
+        printf("NÃO PASSOU NO TESTE -- %d\n", resultado_I_P);
         cria_func(teste2I, params_I_P, 2, codigo_I_P);
         teste_I_P = (func_ptr_0_P) codigo_I_P;
         int resultado_I_P = teste_I_P(3);
@@ -256,6 +302,12 @@ int main(void)
         int resultado_P_F = teste_P_F(15);
         fprintf(stderr, "\nPARAM - FIX : ");
 
+    if( resultado_P_F == 45)
+    {
+        printf("tipo_val = INT_PAR e orig_val = PARAM | tipo_val = INT_PAR e orig_val = FIX, PASSOU NO TESTE\n");
+    }
+    else{
+        printf("NÃO PASSOU NO TESTE\n");
         if( resultado_P_F == 45)
         {
             fprintf(stderr, "PASSOU NO TESTE\n");
@@ -280,6 +332,16 @@ int main(void)
         params_P_I[1].valor.v_ptr = &valor_I_I;
 
 
+    cria_func(teste2I, params_P_I, 2, codigo_P_I);
+    teste_P_I = (func_ptr_1_P_I) codigo_P_I;
+    int resultado_P_I = teste_P_I(15);
+    printf("\nPARAM - PARAM : ");
+    if( resultado_P_I == 45)
+    {
+        printf("tipo_val = INT_PAR e orig_val = PARAM | tipo_val = INT_PAR e orig_val = INT, PASSOU NO TESTE\n");
+    }
+    else{
+        printf("NÃO PASSOU NO TESTE\n");
         cria_func(teste2I, params_P_I, 2, codigo_P_I);
         teste_P_I = (func_ptr_1_P_I) codigo_P_I;
         int resultado_P_I = teste_P_I(15);
@@ -305,6 +367,16 @@ int main(void)
         params_P_P[1].tipo_val = INT_PAR; 
         params_P_P[1].orig_val = PARAM;
 
+    cria_func(teste2I, params_P_P, 2, codigo_P_P);
+    teste_P_P = (func_ptr_2_P_I) codigo_P_P;
+    int resultado_P_P = teste_P_P(15,3);
+    printf("\nPARAM - PARAM : ");
+    if( resultado_P_P == 45)
+    {
+        printf("tipo_val = INT_PAR e orig_val = PARAM | tipo_val = INT_PAR e orig_val = PARAM, PASSOU NO TESTE\n");
+    }
+    else{
+        printf("NÃO PASSOU NO TESTE -- %d\n", resultado_P_P);
         cria_func(teste2I, params_P_P, 2, codigo_P_P);
         teste_P_P = (func_ptr_2_P_I) codigo_P_P;
         int resultado_P_P = teste_P_P(15,3);
@@ -321,6 +393,9 @@ int main(void)
     }
     #endif
 
+   {
+        //PARAM - PARAM
+        printf("\n PTR - PTR : ");
     #ifdef TESTES_PTR
     {
         //PTR - PTR
@@ -348,6 +423,7 @@ int main(void)
 
         if(resultado_F_F)
         {
+            printf("tipo_val = PTR_PAR e orig_val = FIX | tipo_val = PTR_PAR e orig_val = FIX, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -379,6 +455,7 @@ int main(void)
         fprintf(stderr, "\nFIX - IND : ");
         if(resultado_F_I )
         {
+            printf("tipo_val = PTR_PAR e orig_val = FIX | tipo_val = PTR_PAR e orig_val = IND, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -406,6 +483,7 @@ int main(void)
         fprintf(stderr, "\nFIX - PARAM : ");
         if(resultado_F_P)
         {
+            printf("tipo_val = PTR_PAR e orig_val = FIX | tipo_val = PTR_PAR e orig_val = PARAM, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -439,6 +517,7 @@ int main(void)
 
         if(resultado_I_F)
         {
+            printf("tipo_val = PTR_PAR e orig_val = IND | tipo_val = PTR_PAR e orig_val = FIX, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -473,6 +552,7 @@ int main(void)
         fprintf(stderr, "\n IND - IND : ");
         if(resultado_I_I)
         {
+            printf("tipo_val = PTR_PAR e orig_val = IND | tipo_val = PTR_PAR e orig_val = IND, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -503,6 +583,7 @@ int main(void)
         fprintf(stderr, "\nIND - PARAM : ");
         if(resultado_I_P)
         {
+            printf("tipo_val = PTR_PAR e orig_val = IND | tipo_val = PTR_PAR e orig_val = PARAM, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -531,6 +612,7 @@ int main(void)
 
         if(resultado_P_F)
         {
+            printf("tipo_val = PTR_PAR e orig_val = PARAM | tipo_val = PTR_PAR e orig_val = FIX, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -540,7 +622,7 @@ int main(void)
 
         //PARAM - IND
 
-        DescParam params_P_I[2];
+        /* DescParam params_P_I[2];
         unsigned char codigo_P_I[500];
         func_ptr_1_P_P teste_P_I;
 
@@ -566,11 +648,11 @@ int main(void)
         else{
             fprintf(stderr, "NÃO PASSOU NO TESTE\n");
 
-        } 
+        }  */
 
         //PARAM - PARAM
 
-        DescParam params_P_P[2];
+       /*  DescParam params_P_P[2];
         unsigned char codigo_P_P[500];
         func_ptr_2_P_P teste_P_P;
 
@@ -586,6 +668,7 @@ int main(void)
         fprintf(stderr, "\nPARAM - PARAM : ");
         if(resultado_P_P)
         {
+            printf("tipo_val = PTR_PAR e orig_val = PARAM | tipo_val = PTR_PAR e orig_val = PARAM, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -594,6 +677,8 @@ int main(void)
         }
    }
 
+ {
+        printf("\n INT - PTR : ");
    {
         fprintf(stderr, "\n INT - PTR : ");
 
@@ -619,6 +704,7 @@ int main(void)
 
         if(resultado_F_F)
         {
+            printf("tipo_val = INT_PAR e orig_val = FIX | tipo_val = PTR_PAR e orig_val = FIX, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -650,6 +736,7 @@ int main(void)
         fprintf(stderr, "\nFIX - IND : ");
         if(resultado_F_I)
         {
+            printf("tipo_val = PTR_PAR e orig_val = PARAM | tipo_val = PTR_PAR e orig_val = PARAM, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -677,6 +764,7 @@ int main(void)
         fprintf(stderr, "\nFIX - PARAM : ");
         if(resultado_F_P)
         {
+            printf("tipo_val = PTR_PAR e orig_val = FIX | tipo_val = PTR_PAR e orig_val = PARAM, PASSOU NO TESTE\n\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -710,6 +798,7 @@ int main(void)
 
         if(resultado_I_F)
         {
+            printf("tipo_val = PTR_PAR e orig_val = IND | tipo_val = PTR_PAR e orig_val = FIX, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -744,6 +833,7 @@ int main(void)
         fprintf(stderr, "\n IND - IND : ");
         if(resultado_I_I)
         {
+            printf("tipo_val = PTR_PAR e orig_val = IND | tipo_val = PTR_PAR e orig_val = IND, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -774,6 +864,7 @@ int main(void)
         fprintf(stderr, "\nIND - PARAM : ");
         if(resultado_I_P)
         {
+            printf("tipo_val = PTR_PAR e orig_val = IND | tipo_val = PTR_PAR e orig_val = PARAM, PASSOU NO TESTE\nn");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -802,6 +893,7 @@ int main(void)
 
         if(resultado_P_F)
         {
+            printf("tipo_val = PTR_PAR e orig_val = PARAM | tipo_val = PTR_PAR e orig_val = FIX, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -832,6 +924,7 @@ int main(void)
         fprintf(stderr, "\nPARAM - PARAM : ");
         if(resultado_P_I)
         {
+            printf("tipo_val = PTR_PAR e orig_val = PARAM | tipo_val = PTR_PAR e orig_val = IND, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
@@ -857,18 +950,22 @@ int main(void)
         fprintf(stderr, "\nPARAM - PARAM : ");
         if(resultado_P_P)
         {
+            printf("tipo_val = PTR_PAR e orig_val = PARAM | tipo_val = PTR_PAR e orig_val = PARAM, PASSOU NO TESTE\n");
             fprintf(stderr, "PASSOU NO TESTE\n");
         }
         else{
             fprintf(stderr, "NÃO PASSOU NO TESTE -- %d\n", resultado_P_P);
 
         }
+   }  
+
+     //PARAM - PARAM
     }
     #endif 
     /* {
         //PARAM - PARAM
 
-        DescParam params_P_P[2];
+    /*     DescParam params_P_P[2];
         unsigned char codigo_P_P[500];
         func_ptr_1_P_I teste_P_P;
         int vNums [] = {1,2,3,4};
@@ -891,6 +988,7 @@ int main(void)
         else{
             fprintf(stderr, "NÃO PASSOU NO TESTE -- %d\n", resultado_P_P);
 
+        } 
         }
     }
 
@@ -925,6 +1023,9 @@ int main(void)
         else{
             fprintf(stderr, "NÃO PASSOU NO TESTE -- %d\n", resultado_P_P);
 
+        } */
+}
+}
         }
     } */
     return 0;
