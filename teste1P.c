@@ -70,11 +70,12 @@ int main(void)
 
     unsigned char codigo3[500];
     char ind[] = "Arcane acabou";
-
+    char* p = ind;
+    char** pp = &p;
     //TESTE 1 - INTEIRO
     params[0].tipo_val = PTR_PAR; /* o primeiro parâmetro de memcmp é um ponteiro para char */
     params[0].orig_val = IND; 
-    params[0].valor.v_ptr = ind;
+    params[0].valor.v_ptr = pp;
 
 
     //cria_func (teste1P, params, 1, codigo3);
